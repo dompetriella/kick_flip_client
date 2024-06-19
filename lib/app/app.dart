@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kick_flip_client/routing/router.dart';
 import 'package:kick_flip_client/routing/routes.dart';
-import 'package:kick_flip_client/theme.dart';
+import 'package:kick_flip_client/app/theme.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});

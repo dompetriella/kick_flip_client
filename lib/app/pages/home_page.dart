@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:kick_flip_client/app/db_functions/client_functions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,6 +36,13 @@ class _HomePageState extends State<HomePage> {
               key: _formKey,
               child: Column(
                 children: [
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 24.0),
+                      child: Container(
+                        height: 80,
+                        width: 300,
+                        color: Theme.of(context).colorScheme.primary,
+                      )),
                   UserEntry(
                     textController: _roomCodeController,
                     title: 'Room Code',
@@ -46,7 +55,14 @@ class _HomePageState extends State<HomePage> {
                     height: 16,
                   ),
                   ElevatedButton(
-                      onPressed: () => _submitForm, child: Text("Play"))
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          addPlayerToRoom(
+                              _usernameController.text.toUpperCase(),
+                              _roomCodeController.text.toUpperCase());
+                        }
+                      },
+                      child: Text("Play"))
                 ],
               )),
         ),
@@ -81,15 +97,22 @@ class UserEntry extends StatelessWidget {
             height: 4,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: TextFormField(
               controller: textController,
               maxLength: maxLength,
+              inputFormatters: [UpperCaseTextFormatter()],
               decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Theme.of(context).colorScheme.onPrimary,
                   labelStyle: const TextStyle(color: Colors.black),
                   counterText: '',
+                  contentPadding: EdgeInsets.only(left: 16),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.tertiary),
+                      borderRadius: BorderRadius.circular(15)),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 5),
                     borderRadius: BorderRadius.circular(20.0),
                   )),
               validator: (value) {
@@ -102,6 +125,19 @@ class UserEntry extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    return newValue.copyWith(
+      text: newValue.text.toUpperCase(),
+      selection: newValue.selection,
     );
   }
 }

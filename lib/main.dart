@@ -5,7 +5,7 @@ import 'package:kick_flip_client/app/app.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "dotenv");
   WidgetsFlutterBinding.ensureInitialized();
 
   await Supabase.initialize(

@@ -10,7 +10,6 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    late final GoRouter router = GoRouter(routes: $appRoutes);
     return MaterialApp.router(
       title: 'App',
       themeMode: ThemeMode.light,

@@ -55,11 +55,12 @@ class _HomePageState extends State<HomePage> {
                     height: 16,
                   ),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState?.validate() ?? false) {
-                          addPlayerToRoom(
+                          await addPlayerToRoom(
                               _usernameController.text.toUpperCase(),
-                              _roomCodeController.text.toUpperCase());
+                              _roomCodeController.text.toUpperCase(),
+                              context);
                         }
                       },
                       child: Text("Play"))

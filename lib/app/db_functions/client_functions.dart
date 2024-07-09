@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kick_flip_client/main.dart';
 import 'package:kick_flip_client/routing/routes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
